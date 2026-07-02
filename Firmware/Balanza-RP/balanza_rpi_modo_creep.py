@@ -3,6 +3,7 @@
 
 """
 Modo creep para Raspberry Pi + Balanza-Log.
+Desarrollado por DRengifo (LoRe-Ingenieria.cl)
 
 Rutina:
 - al iniciar el servicio:
