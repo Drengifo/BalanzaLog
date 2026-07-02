@@ -2,6 +2,7 @@
   ============================================================
   BALANZA-LOG - VERSION 1.10
   Arduino Nano (ATmega328P)
+  Desarrollado por DRengifo (LoRe-Ingenieria.cl)
   ============================================================
 
   PINOUT DEFINIDO:
