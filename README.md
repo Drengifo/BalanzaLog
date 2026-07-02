@@ -1,2 +1,2 @@
 # BalanzaLog
-Sistema autonomo para pesaje prolongado de muestras.
+Sistema autónomo para pesaje prolongado de muestras.
