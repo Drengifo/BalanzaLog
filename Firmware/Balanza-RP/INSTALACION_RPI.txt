@@ -1,0 +1,84 @@
+INSTALACION PROPUESTA EN LA RASPBERRY PI
+=======================================
+
+1) Crear carpeta de trabajo:
+   mkdir -p ~/balanza-rpi/data ~/balanza-rpi/state ~/balanza-rpi/logs
+
+2) Copiar a esa carpeta estos archivos:
+   - balanza_rpi_modo_ciclo.py
+   - balanza_rpi_modo_creep.py
+   - requirements.txt
+   - balanza-log.service
+
+3) Crear entorno virtual:
+   cd ~/balanza-rpi
+   python3 -m venv .venv
+   source .venv/bin/activate
+   pip install --upgrade pip
+   pip install -r requirements.txt
+
+4) Elegir el script activo del servicio.
+   Opcion 1: modo ciclo anti-creep
+   cp balanza_rpi_modo_ciclo.py balanza_activo.py
+
+   Opcion 2: modo creep
+   cp balanza_rpi_modo_creep.py balanza_activo.py
+
+5) Dar permisos:
+   chmod +x balanza_*.py
+
+6) Editar el servicio y reemplazar TU_USUARIO por tu usuario real de la Raspberry.
+   Luego copiarlo:
+   sudo cp balanza-log.service /etc/systemd/system/balanza-log.service
+
+7) Recargar systemd y activar servicio:
+   sudo systemctl daemon-reload
+   sudo systemctl enable balanza-log.service
+   sudo systemctl start balanza-log.service
+
+8) Ver estado:
+   sudo systemctl status balanza-log.service
+
+9) Ver logs en vivo:
+   journalctl -u balanza-log.service -f
+
+CAMBIAR DE MODO DESPUES
+=======================
+
+Si quieres cambiar de modo mas adelante:
+
+Modo ciclo:
+   cd ~/balanza-rpi
+   cp balanza_rpi_modo_ciclo.py balanza_activo.py
+   sudo systemctl restart balanza-log.service
+
+Modo creep:
+   cd ~/balanza-rpi
+   cp balanza_rpi_modo_creep.py balanza_activo.py
+   sudo systemctl restart balanza-log.service
+
+NOTA IMPORTANTE SOBRE DAEMON-RELOAD
+==================================
+
+- Si solo cambias el script Python, basta con:
+  sudo systemctl restart balanza-log.service
+
+- Si modificas el archivo del servicio .service, ahi si debes hacer:
+  sudo systemctl daemon-reload
+  sudo systemctl restart balanza-log.service
+
+SALIDA DE DATOS
+===============
+
+Los .txt quedan en:
+   ~/balanza-rpi/data/
+
+Cada arranque del script crea un archivo nuevo con timestamp.
+
+NOTA IMPORTANTE PARA MODO CREEP
+===============================
+
+Tu firmware actual del Arduino baja el actuador en setup al reiniciar.
+Eso significa que si se corta la energia o reinicia el Arduino, la continuidad fisica
+perfecta del ensayo creep puede romperse aunque el servicio de la Raspberry vuelva a levantar.
+El script modo creep vuelve a hacer ACT UP + TARE al arrancar para dejar el sistema operativo otra vez.

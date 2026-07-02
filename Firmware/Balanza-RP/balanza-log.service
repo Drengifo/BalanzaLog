@@ -1,0 +1,17 @@
+[Unit]
+Description=Balanza Log en Raspberry Pi
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=TU_USUARIO
+WorkingDirectory=/home/TU_USUARIO/balanza-rpi
+ExecStart=/home/TU_USUARIO/balanza-rpi/.venv/bin/python /home/TU_USUARIO/balanza-rpi/balanza_activo.py
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
