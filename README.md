@@ -1,6 +1,7 @@
 # BalanzaLog
 
-**Sistema autónomo para pesaje prolongado de muestras.**
+<img width="713" height="673" alt="imagen" src="https://github.com/user-attachments/assets/a80cb5f7-ac27-4684-94fb-2de9cc05745c" />
+
 
 BalanzaLog es un equipo diseñado y fabricado para registrar el peso de una muestra durante periodos largos, reduciendo la intervención manual y permitiendo ensayos más ordenados y repetibles. El sistema combina una celda de carga con electrónica de control, una pantalla local, registro automático de datos y un actuador que permite operar distintos modos de medición.
 
