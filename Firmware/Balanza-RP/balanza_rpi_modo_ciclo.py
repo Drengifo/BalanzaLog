@@ -3,6 +3,7 @@
 
 """
 Modo ciclo para Raspberry Pi + Balanza-Log.
+Desarrollado por DRengifo (LoRe-Ingenieria.cl)
 
 Rutina:
 - cada INTERVAL_MIN minutos:
